@@ -77,4 +77,10 @@ class TestElements:
             text = web_table_page.check_delete_text()
             assert text == "No rows found"
 
+        def test_web_table_change_count_row(self, driver):
+            web_table_page = WebTablePage(driver, 'https://demoqa.com/webtables')
+            web_table_page.open()
+            count = web_table_page.select_up_to_some_rows()
+            assert count == [5, 10, 20, 25, 50, 100], 'The number of rows in the table has not been change incorrectly'
+
 
