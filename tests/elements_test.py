@@ -1,7 +1,8 @@
 import random
 import time
 
-from pages.elements_page import TestBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage, LinksPage
+from pages.elements_page import TestBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage, LinksPage, \
+    TestUploadAndDownloadPage
 
 
 class TestElements:
@@ -114,4 +115,23 @@ class TestElements:
             links_page.open()
             href_link, current_url = links_page.check_dynamic_link()
             assert href_link == current_url, 'the link is broken or url is incorrect'
+
+        def test_no_content_link(self, driver):
+            links_page = LinksPage(driver, 'https://demoqa.com/links')
+            links_page.open()
+            response_code = links_page.check_no_content_link("https://demoqa.com/no-content")
+            assert response_code == 204, "the link works or the status code in son 204"
+
+    class TestUploadAndDownload:
+
+        def test_upload_file(self, driver):
+            upload_download_page = TestUploadAndDownloadPage(driver, 'https://demoqa.com/upload-download')
+            upload_download_page.open()
+            file_name, result = upload_download_page.upload_file()
+            assert file_name == result
+
+        def test_download_file(self, driver):
+            upload_download_page = TestUploadAndDownloadPage(driver, 'https://demoqa.com/upload-download')
+            upload_download_page.open()
+            upload_download_page.download_file()
 

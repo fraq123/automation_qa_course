@@ -68,3 +68,12 @@ class LinksPageLocators:
     SIMPLE_LINK = (By.CSS_SELECTOR, 'a[id="simpleLink"]')
     BAD_REQUESTS = (By.CSS_SELECTOR, 'a[id="bad-request"]')
     DYNAMIC_LINK = (By.XPATH, '//div[2]/p[2]/a')
+    NO_CONTENT_LINK = (By.CSS_SELECTOR, 'a[id="no-content"]')
+
+
+class UploadAndDownloadLocators:
+    UPLOAD_FILE = (By.CSS_SELECTOR, 'input[id="uploadFile"]')
+    UPLOADED_FILE = (By.CSS_SELECTOR, 'p[id="uploadedFilePath"]')
+
+    DOWNLOAD_FILE = (By.CSS_SELECTOR, 'a[id="downloadButton"]')
+
