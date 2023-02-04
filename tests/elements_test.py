@@ -2,7 +2,7 @@ import random
 import time
 
 from pages.elements_page import TestBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage, LinksPage, \
-    TestUploadAndDownloadPage, DynamicPropertiesPage
+    TestUploadAndDownloadPage, DynamicPropertiesPage, StudentRegistrationFormPage
 
 
 class TestElements:
@@ -138,7 +138,7 @@ class TestElements:
 
         class TestDynamicProperties:
 
-            def test_dynamic_properties(self, driver ):
+            def test_dynamic_properties(self, driver):
                 dynamic_properties_page = DynamicPropertiesPage(driver, "https://demoqa.com/dynamic-properties")
                 dynamic_properties_page.open()
                 color_before, color_after = dynamic_properties_page.check_change_of_color()
@@ -155,6 +155,14 @@ class TestElements:
                 dynamic_properties_page.open()
                 enable = dynamic_properties_page.check_enable_button()
                 assert enable is True, 'button did not enable after 5 second'
+
+        class TestStudentRegistrationForm:
+
+            def test_student_registration_form(self, driver):
+                student_page = StudentRegistrationFormPage(driver, "https://demoqa.com/automation-practice-form")
+                student_page.open()
+                student_page.filling_in_student_fields('male')
+
 
 
 
