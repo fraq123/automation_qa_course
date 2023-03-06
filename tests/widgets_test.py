@@ -1,6 +1,7 @@
 import time
 
-from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage
+from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, ProgressBarPage, SliderPage, TabsPage, \
+    ToolTipsPage, MenuPage
 
 
 class TestWidgets:
@@ -62,3 +63,52 @@ class TestDatePickerPage:
         value_date_before, value_date_after = date_picker_page.select_date_and_time()
         assert value_date_before != value_date_after, 'the date and time have not been changed'
 
+
+class TestSliderPage:
+    def test_slider(self, driver):
+        slider = SliderPage(driver, 'https://demoqa.com/slider')
+        slider.open()
+        before, after = slider.change_slider_value()
+        assert before != after, 'the slider value has not been changed'
+
+
+class TestProgressBarPage:
+    def test_progress_bar(self, driver):
+        progress_bar = ProgressBarPage(driver, 'https://demoqa.com/progress-bar')
+        progress_bar.open()
+        before, after, after_all, before_reset = progress_bar.change_progress_bar_value()
+        assert before != after != after_all != before_reset, 'the progress bar value has not been changed'
+
+
+class TestTabsPage:
+
+    def test_tabs(self, driver):
+        tabs = TabsPage(driver, 'https://demoqa.com/tabs')
+        tabs.open()
+        what_button, what_content = tabs.check_tabs('What')
+        origin_button, origin_content = tabs.check_tabs('Origin')
+        use_button, use_content = tabs.check_tabs('Use')
+        assert what_button == 'What' and what_content != 0
+        assert origin_button == 'Origin' and origin_content != 0
+        assert use_button == 'Use' and use_content != 0
+
+
+class TestToolTips:
+
+    def test_tool_tips(self, driver):
+        tool_tips_page = ToolTipsPage(driver, 'https://demoqa.com/tool-tips')
+        tool_tips_page.open()
+        button, field, contrary, section = tool_tips_page.check_tool_tips()
+        assert button == 'You hovered over the Button', 'hover missing or incorrect content'
+        assert field == 'You hovered over the text field', 'hover missing or incorrect content'
+        assert contrary == 'You hovered over the Contrary', 'hover missing or incorrect content'
+        assert section == 'You hovered over the 1.10.32', 'hover missing or incorrect content'
+
+
+class TestMenu:
+
+    def test_menu(self, driver):
+        menu_page = MenuPage(driver, 'https://demoqa.com/menu')
+        menu_page.open()
+        data = menu_page.check_menu()
+        assert data == ['Main Item 1', 'Main Item 2', 'Sub Item', 'Sub Item', 'SUB SUB LIST »', 'Sub Sub Item 1', 'Sub Sub Item 2', 'Main Item 3']

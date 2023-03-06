@@ -6,7 +6,8 @@ from selenium.webdriver import Keys
 from selenium.webdriver.support.select import Select
 
 from generator.generator import generator_color, generated_date
-from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators
+from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators, \
+    ProgressBarPageLocators, SliderPageLocators, TabsPageLocators, ToolTipsPageLocators, MenuPageLocators
 from pages.base_page import BasePage
 
 
@@ -120,3 +121,85 @@ class DatePickerPage(BasePage):
             if item.text == value:
                 item.click()
                 break
+
+
+class SliderPage(BasePage):
+    locators = SliderPageLocators()
+
+    def change_slider_value(self):
+        value_before = self.element_is_visible(self.locators.SLIDER_VALUE).get_attribute('value')
+        slider_input = self.element_is_visible(self.locators.INPUT_SLIDER)
+        self.action_drag_and_drop_by_offset(slider_input, random.randint(1, 100), 0)
+        value_after = self.element_is_visible(self.locators.INPUT_SLIDER).get_attribute('value')
+        return value_before, value_after
+
+
+class ProgressBarPage(BasePage):
+    locators = ProgressBarPageLocators()
+
+    def change_progress_bar_value(self):
+        value_before = self.element_is_present(self.locators.PROGRESS_BAR_VALUE).text
+        progress_bar_button = self.element_is_visible(self.locators.PROGRESS_BAR_BUTTON)
+        progress_bar_button.click()
+        time.sleep(random.randint(2, 4))
+        progress_bar_button.click()
+        value_after = self.element_is_present(self.locators.PROGRESS_BAR_VALUE).text
+        progress_bar_button.click()
+        time.sleep(11)
+        value_after_all_progress = self.element_is_present(self.locators.PROGRESS_BAR_VALUE_ALL).text
+        self.element_is_visible(self.locators.PROGRESS_BAR_RESET).click()
+        value_before_reset = self.element_is_present(self.locators.PROGRESS_BAR_VALUE).text
+        return value_before, value_after, value_after_all_progress, value_before_reset
+
+
+class TabsPage(BasePage):
+    locators = TabsPageLocators()
+
+    def check_tabs(self, new_tab):
+        tabs = {'What':
+                    {'title': self.locators.TABS_WHAT_BUTTON,
+                     'content': self.locators.TABS_WHAT_TEXT},
+                'Origin':
+                    {'title': self.locators.TABS_ORIGIN_BUTTON,
+                     'content': self.locators.TABS_ORIGIN_TEXT},
+                'Use':
+                    {'title': self.locators.TABS_USE_BUTTON,
+                     'content': self.locators.TABS_USE_TEXT}
+                }
+
+        button = self.element_is_visible(tabs[new_tab]['title'])
+        button.click()
+        content = self.element_is_visible(tabs[new_tab]['content']).text
+        return button.text, len(content)
+
+
+class ToolTipsPage(BasePage):
+    locators = ToolTipsPageLocators()
+
+    def get_text_from_tool_tips(self, hover_element, wait_element):
+        element = self.element_is_present(hover_element)
+        self.action_move_to_element(element)
+        time.sleep(0.5)
+        self.element_is_visible(wait_element)
+        tool_tip_text = self.element_is_visible(self.locators.TOOL_TIPS_INNERS).text
+        return tool_tip_text
+
+    def check_tool_tips(self):
+        tool_tip_text_button = self.get_text_from_tool_tips(self.locators.HOVER_BUTTON, self.locators.TOOL_TIP_BUTTON)
+        tool_tip_text_field = self.get_text_from_tool_tips(self.locators.FIELD, self.locators.TOOL_TIP_FIELD)
+        tool_tip_text_contrary = self.get_text_from_tool_tips(self.locators.CONTRARY_LINK,
+                                                              self.locators.TOOL_TIP_CONTRARY)
+        tool_tip_text_section = self.get_text_from_tool_tips(self.locators.SECTION_LINK, self.locators.TOOL_TIP_SECTION)
+        return tool_tip_text_button, tool_tip_text_field, tool_tip_text_contrary, tool_tip_text_section
+
+
+class MenuPage(BasePage):
+    locators = MenuPageLocators()
+
+    def check_menu(self):
+        menu_item_list = self.elements_are_present(self.locators.MENU_ITEM_LIST)
+        data = []
+        for item in menu_item_list:
+            self.action_move_to_element(item)
+            data.append(item.text)
+        return data

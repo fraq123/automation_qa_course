@@ -31,3 +31,44 @@ class DatePickerPageLocators:
     DATE_AND_TIME_TIME_LIST = (By.CSS_SELECTOR, 'li[class="react-datepicker__time-list-item "]')
     DATE_AND_TIME_MONTH_LIST = (By.CSS_SELECTOR, 'div[class="react-datepicker__month-option"]')
     DATE_AND_TIME_YEAR_LIST = (By.CSS_SELECTOR, 'div[class="react-datepicker__year-option"]')
+
+
+class SliderPageLocators:
+    INPUT_SLIDER = (By.CSS_SELECTOR, 'input[class="range-slider range-slider--primary"]')
+    SLIDER_VALUE = (By.CSS_SELECTOR, 'input[id="sliderValue"]')
+
+
+class ProgressBarPageLocators:
+    PROGRESS_BAR_BUTTON = (By.CSS_SELECTOR, 'button[id="startStopButton"]')
+    PROGRESS_BAR_VALUE = (By.CSS_SELECTOR, 'div[class="progress-bar bg-info"]')
+    PROGRESS_BAR_VALUE_ALL = (By.CSS_SELECTOR, 'div[class="progress-bar bg-success"]')
+    PROGRESS_BAR_RESET = (By.CSS_SELECTOR, 'button[id="resetButton"]')
+
+
+class TabsPageLocators:
+    TABS_WHAT_BUTTON = (By.CSS_SELECTOR, 'a[id="demo-tab-what"]')
+    TABS_WHAT_TEXT = (By.CSS_SELECTOR, 'div[id="demo-tabpane-what"]')
+    TABS_ORIGIN_BUTTON = (By.CSS_SELECTOR, 'a[id="demo-tab-origin"]')
+    TABS_ORIGIN_TEXT = (By.CSS_SELECTOR, 'div[id="demo-tabpane-origin"]')
+    TABS_USE_BUTTON = (By.CSS_SELECTOR, 'a[id="demo-tab-use"]')
+    TABS_USE_TEXT = (By.CSS_SELECTOR, 'div[id="demo-tabpane-use"]')
+
+
+class ToolTipsPageLocators:
+    HOVER_BUTTON = (By.CSS_SELECTOR, 'button[id="toolTipButton"]')
+    TOOL_TIP_BUTTON = (By.CSS_SELECTOR, 'button[aria-describedby="buttonToolTip"]')
+
+    FIELD = (By.CSS_SELECTOR, 'div[id="texFieldToolTopContainer"] input[id="toolTipTextField"]')
+    TOOL_TIP_FIELD = (By.CSS_SELECTOR, 'input[aria-describedby="textFieldToolTip"]')
+
+    CONTRARY_LINK = (By.XPATH, '//*[.="Contrary"]')
+    TOOL_TIP_CONTRARY = (By.CSS_SELECTOR, 'a[aria-describedby="contraryTexToolTip"]')
+
+    SECTION_LINK = (By.XPATH, '//*[.="1.10.32"]')
+    TOOL_TIP_SECTION = (By.CSS_SELECTOR, 'a[aria-describedby="sectionToolTip"]')
+
+    TOOL_TIPS_INNERS = (By.CSS_SELECTOR, 'div[class="tooltip-inner"]')
+
+
+class MenuPageLocators:
+    MENU_ITEM_LIST = (By.CSS_SELECTOR, 'ul[id="nav"] li a')
