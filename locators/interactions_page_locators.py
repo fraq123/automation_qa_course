@@ -42,9 +42,9 @@ class DroppablePageLocators:
 
     # Prevent Propogation
     PREVENT_TAB = (By.CSS_SELECTOR, 'a[id="droppableExample-tab-preventPropogation"]')
-    NOT_GREEDY_DROP_BOW_TEXT = (By.CSS_SELECTOR, 'div[id="notGreedyDropBox"]')
-    NOT_GREEDY_INNER_BOW = (By.CSS_SELECTOR, 'div[id="notGreedyInnerDropBox"]')
-    GREEDY_DROP_BOX_TEXT = (By.CSS_SELECTOR, 'div[id="greedyDropBox"]')
+    NOT_GREEDY_DROP_BOX_TEXT = (By.CSS_SELECTOR, 'div[id="notGreedyDropBox"] p:nth-child(1)')
+    NOT_GREEDY_INNER_BOX = (By.CSS_SELECTOR, 'div[id="notGreedyInnerDropBox"]')
+    GREEDY_DROP_BOX_TEXT = (By.CSS_SELECTOR, 'div[id="greedyDropBox"] p:nth-child(1)')
     GREEDY_INNER_BOX = (By.CSS_SELECTOR, 'div[id="greedyDropBoxInner"]')
     DRAG_ME_PREVENT = (By.CSS_SELECTOR, '#ppDropContainer #dragBox')
 
