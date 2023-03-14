@@ -1,7 +1,8 @@
 import random
+import time
 
 from locators.interactions_page_locators import SortablePageLocators, SelectablePageLocators, ResizablePageLocators, \
-    DroppablePageLocators, DragabblePageLocators
+    DroppablePageLocators
 from pages.base_page import BasePage
 
 
@@ -130,27 +131,3 @@ class DroppablePage(BasePage):
         time.sleep(1)
         position_after_revert = will_revert.get_attribute('style')
         return position_after_move, position_after_revert
-
-
-class DragabblePage(BasePage):
-    locators = DragabblePageLocators()
-
-    def get_before_and_after_position(self, drag_element):
-        self.action_drag_and_drop_by_offset(drag_element, random.randint(0, 50), random.randint(0, 50))
-        before_position = drag_element.get_attribute('style')
-        self.action_drag_and_drop_by_offset(drag_element, random.randint(0, 50), random.randint(0, 50))
-        after_position = drag_element.get_attribute('style')
-        return before_position, after_position
-    def simple_dra_box(self):
-        drag_div = self.element_is_visible(self.locators.DRAG_ME)
-        before_position, after_position = self.get_before_and_after_position(drag_div)
-        return before_position, after_position
-
-    def axis_restricted_box(self):
-        self.element_is_visible(self.locators.AXIS_RESTRICTED).click()
-        only_x = self.element_is_visible(self.locators.ONLY_X)
-        only_y = self.element_is_visible(self.locators.ONLY_Y)
-        before_position_x, after_position_x = self.get_before_and_after_position(only_x)
-        before_position_y, after_position_y = self.get_before_and_after_position(only_y)
-        return before_position_x, after_position_x, before_position_x, before_position_y
-
