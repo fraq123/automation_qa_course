@@ -42,9 +42,9 @@ class DroppablePageLocators:
 
     # Prevent Propogation
     PREVENT_TAB = (By.CSS_SELECTOR, 'a[id="droppableExample-tab-preventPropogation"]')
-    NOT_GREEDY_DROP_BOW_TEXT = (By.CSS_SELECTOR, 'div[id="notGreedyDropBox"]')
-    NOT_GREEDY_INNER_BOW = (By.CSS_SELECTOR, 'div[id="notGreedyInnerDropBox"]')
-    GREEDY_DROP_BOX_TEXT = (By.CSS_SELECTOR, 'div[id="greedyDropBox"]')
+    NOT_GREEDY_DROP_BOX_TEXT = (By.CSS_SELECTOR, 'div[id="notGreedyDropBox"] p:nth-child(1)')
+    NOT_GREEDY_INNER_BOX = (By.CSS_SELECTOR, 'div[id="notGreedyInnerDropBox"]')
+    GREEDY_DROP_BOX_TEXT = (By.CSS_SELECTOR, 'div[id="greedyDropBox"] p:nth-child(1)')
     GREEDY_INNER_BOX = (By.CSS_SELECTOR, 'div[id="greedyDropBoxInner"]')
     DRAG_ME_PREVENT = (By.CSS_SELECTOR, '#ppDropContainer #dragBox')
 
@@ -54,3 +54,10 @@ class DroppablePageLocators:
     NOT_REVERT = (By.CSS_SELECTOR, 'div[id="notRevertable"]')
     DROP_HERE_REVERT = (By.CSS_SELECTOR, '#revertableDropContainer #droppable')
 
+
+class DragabblePageLocators:
+    SIMPLE_TAB = (By.CSS_SELECTOR, 'a[id="draggableExample-tab-simple"]')
+    DRAG_ME = (By.CSS_SELECTOR, 'div[id="dragBox"]')
+    AXIS_RESTRICTED = (By.CSS_SELECTOR, 'a[id="draggableExample-tab-axisRestriction"]')
+    ONLY_X = (By.CSS_SELECTOR, 'div[id="restrictedX"]')
+    ONLY_Y = (By.CSS_SELECTOR, 'div[id="restrictedY"]')
