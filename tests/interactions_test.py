@@ -1,4 +1,4 @@
-from pages.interactions_page import SortablePage, SelectablePage, ResizablePage, DroppablePage
+from pages.interactions_page import SortablePage, SelectablePage, ResizablePage, DroppablePage, DragabblePage
 
 
 class TestInteractions:
@@ -65,3 +65,20 @@ class TestDroppablePage:
         not_will_after_move, not_will_after_revert = droppable_page.drop_revert_draggable('not_will')
         assert will_after_move != will_after_revert, 'the element has not reverted'
         assert not_will_after_move == not_will_after_revert, 'the elements has reverted'
+
+
+class TestDragabble:
+
+    def test_simple_dragabble(self, driver):
+        dragabble_page = DragabblePage(driver, 'https://demoqa.com/dragabble')
+        dragabble_page.open()
+        before, after = dragabble_page.simple_dra_box()
+        assert before != after, 'the position of the box has not been changed'
+
+    def test_axis_restricted(self, driver):
+        dragabble_page = DragabblePage(driver, 'https://demoqa.com/dragabble')
+        dragabble_page.open()
+        before_x, after_x, before_y, after_y = dragabble_page.axis_restricted_box()
+        assert before_x != after_x
+        assert before_y != after_y
+
