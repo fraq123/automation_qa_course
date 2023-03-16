@@ -1,5 +1,8 @@
 import random
 import time
+
+import allure
+
 from locators.alerts_page_locators import BrowserWindowsPageLocators, AlertsPageLocators, FramesPageLocators, \
     NestedFramePageLocators, ModalDialogPageLocators
 from pages.base_page import BasePage
@@ -8,12 +11,14 @@ from pages.base_page import BasePage
 class BrowserWindowsPage(BasePage):
     locators = BrowserWindowsPageLocators()
 
+    @allure.step('проверка открытия новой вкладки')
     def new_tab(self):
         self.element_is_visible(self.locators.NEW_TAB).click()
         self.driver.switch_to.window(self.driver.window_handles[1])
         text_title = self.element_is_present(self.locators.TITLE_NEW).text
         return text_title
 
+    @allure.step('проверка открытия нового окна')
     def new_window(self):
         self.element_is_visible(self.locators.NEW_WINDOW).click()
         self.driver.switch_to.window(self.driver.window_handles[1])
@@ -24,17 +29,20 @@ class BrowserWindowsPage(BasePage):
 class AlertsPage(BasePage):
     locators = AlertsPageLocators()
 
+    @allure.step('получения подтверждения')
     def alerts_see_alert(self):
         self.element_is_visible(self.locators.SEE_ALERT).click()
         confirm = self.driver.switch_to.alert
         return confirm.text
 
+    @allure.step('проверка появления подтверждения через 5 секунд')
     def alerts_five_sec(self):
         self.element_is_visible(self.locators.ALERT_BUTTON_5SEC).click()
         time.sleep(6)
         confirm = self.driver.switch_to.alert
         return confirm.text
 
+    @allure.step('проверка появления подтверждения или отклонения')
     def alerts_will_appear(self):
         self.element_is_visible(self.locators.ALERT_BUTTON_OK).click()
         confirm = self.driver.switch_to.alert
@@ -42,6 +50,7 @@ class AlertsPage(BasePage):
         text_result = self.element_is_present(self.locators.CONFIRM_RESULT).text
         return text_result
 
+    @allure.step('проверка появления окна куда вписать своё имя')
     def alerts_prompt_alert(self):
         text = f'autotest{random.randint(0, 999)}'
         self.element_is_visible(self.locators.ALERT_BUTTON_SEND).click()
@@ -55,6 +64,7 @@ class AlertsPage(BasePage):
 class FramesPage(BasePage):
     locators = FramesPageLocators()
 
+    @allure.step('проверка фрейма')
     def frame_first(self, frame_num):
         if frame_num == 'frame1':
             frame = self.element_is_present(self.locators.FIRST_FRAME)
@@ -76,6 +86,7 @@ class FramesPage(BasePage):
 class NestedFramePage(BasePage):
     locators = NestedFramePageLocators()
 
+    @allure.step('проверка вложенного фрейма')
     def check_nested_frame(self):
         parent_frame = self.element_is_present(self.locators.PARENT_IFRAME)
         self.driver.switch_to.frame(parent_frame)
@@ -89,6 +100,7 @@ class NestedFramePage(BasePage):
 class ModalDialogPage(BasePage):
     locators = ModalDialogPageLocators()
 
+    @allure.step('проверка модальных диалогов')
     def check_small_modal(self):
         self.element_is_visible(self.locators.SMALL_MODAL).click()
         title_small_text = self.element_is_visible(self.locators.TITLE_SMALL_MODAL).text
